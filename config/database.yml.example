@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username:
+  password:
+  # If you using docker the host should be "db"
+  host: localhost
+  port: 5432
+
+development:
+ <<: *default
+ database:
+
+test:
+ <<: *default
+ database:
+
+production:
+ <<: *default
+ database:

@@ -1,0 +1,13 @@
+---
+en:
+  active_admin:
+    dashboard: Main page
+    dashboard_welcome:
+      call_to_action: Actions
+      welcome: Welcome to your first admin
+  api:
+    errors:
+      invalid_content_type: Invalid content type header
+      missing_param: A required param is missing
+      not_found: Couldn't find the record
+      server: An error ocurred
