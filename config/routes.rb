@@ -14,6 +14,9 @@ Rails.application.routes.draw do
       devise_scope :user do
         resource :user, only: %i[update show] do
           get :profile
+          controller :sessions do
+            post :apple_sign_in, on: :collection
+          end
         end
       end
       resources :settings, only: [] do

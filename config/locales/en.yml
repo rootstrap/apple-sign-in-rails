@@ -11,3 +11,4 @@ en:
       missing_param: A required param is missing
       not_found: Couldn't find the record
       server: An error ocurred
+      apple_sign_in: 'Invalid jwt'

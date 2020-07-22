@@ -26,7 +26,7 @@ gem 'sendgrid', '~> 1.2.4'
 gem 'sprockets', '~> 3.7.2'
 gem 'webpacker', '~> 4.2', '>= 4.2.2'
 gem 'yaaf', '~> 0.1'
-gem 'apple_sign_in', git: 'https://github.com/rootstrap/apple_sign_in.git'
+gem 'apple_sign_in', git: 'https://github.com/rootstrap/apple_sign_in.git', branch: 'feature/return-jwt-attributes'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -60,6 +60,7 @@ end
 
 group :test do
   gem 'faker', '~> 2.7'
+  gem 'jwt', '~> 2.2'
   gem 'shoulda-matchers', '~> 4.1', '>= 4.1.2'
   gem 'simplecov', '~> 0.13.0', require: false
   gem 'webmock', '~> 3.7', '>= 3.7.6'
