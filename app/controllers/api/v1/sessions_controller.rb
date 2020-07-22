@@ -22,7 +22,7 @@ module Api
           apple_sign_in_params[:user_identity],
           apple_sign_in_params[:jwt]
         ).validate
-        AppleSignIn::Token.new(apple_sign_up_params[:code]).authenticate
+        AppleSignIn::Token.new(apple_sign_in_params[:code]).authenticate
 
         data.slice(:email)
       end
