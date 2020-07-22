@@ -32,17 +32,18 @@ describe 'POST api/v1/users/registrations/apple_sign_up', type: :request do
         status: 200,
         headers: { 'Content-Type': 'application/json' }
       )
+    allow_any_instance_of(AppleSignIn::Token).to receive(:authenticate)
     AppleSignIn.config.apple_client_id = jwt_aud
   end
 
   let(:params) do
     {
-      uid: uid,
-      signed_jwt: signed_jwt
+      user_identity: uid,
+      jwt: signed_jwt
     }
   end
 
-  subject { post user_registration_path, params: params, as: :json }
+  subject { post apple_sign_in_api_v1_user_path, params: params, as: :json }
 
   context 'when the parameters are valid' do
     context 'when the parameters of the initilizer are correct' do
@@ -50,16 +51,22 @@ describe 'POST api/v1/users/registrations/apple_sign_up', type: :request do
       let(:user_identity) { '1234.5678.910' }
       let(:uid) { user_identity }
 
-      before { subject }
-
       context 'when the user was not registered' do
         it 'creates a new user' do
           expect { subject }.to change { User.count }.by(1)
         end
       end
+
+      context 'when the user was registered' do
+        before { subject }
+        
+        it 'creates a new user' do
+          expect { subject }.not_to change { User.count }
+        end
+      end
     end
 
-    context 'when the parameters are not valid' do
+    context 'when the parameters of the initilizer not valid' do
       let(:apple_body) { [exported_private_key] }
       let(:user_identity) { '1234.5678.910' }
       let(:uid) { '1234.5678.911' }
