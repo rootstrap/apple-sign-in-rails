@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-AppleSignIn.configure do |config|
+AppleAuth.configure do |config|
   config.apple_client_id = ENV.fetch('APPLE_CIENT_ID')
   config.apple_private_key = ENV.fetch('APPLE_PRIVATE_KEY')
   config.apple_key_id = ENV.fetch('APPLE_KEY_ID')

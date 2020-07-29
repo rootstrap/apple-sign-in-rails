@@ -8,7 +8,7 @@ module Api
         apple_params = apple_validate
         @resource = sign_in_with_apple(apple_params)
         custom_sign_in
-      rescue AppleSignIn::UserIdentity::JWTValidationError
+      rescue AppleAuth::Conditions::JWTValidationError
         render_error(:bad_request, I18n.t('api.errors.apple_sign_in'))
       rescue JWT::ExpiredSignature => e
         render_error(:bad_request, e.message)
@@ -18,11 +18,11 @@ module Api
 
       private
       def apple_validate
-        data = AppleSignIn::UserIdentity.new(
+        data = AppleAuth::UserIdentity.new(
           apple_sign_in_params[:user_identity],
           apple_sign_in_params[:jwt]
-        ).validate
-        AppleSignIn::Token.new(apple_sign_in_params[:code]).authenticate
+        ).validate!
+        AppleAuth::Token.new(apple_sign_in_params[:code]).authenticate
 
         data.slice(:email)
       end

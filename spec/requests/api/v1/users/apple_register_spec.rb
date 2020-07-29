@@ -32,8 +32,8 @@ describe 'POST api/v1/users/registrations/apple_sign_up', type: :request do
         status: 200,
         headers: { 'Content-Type': 'application/json' }
       )
-    allow_any_instance_of(AppleSignIn::Token).to receive(:authenticate)
-    AppleSignIn.config.apple_client_id = jwt_aud
+    allow_any_instance_of(AppleAuth::Token).to receive(:authenticate)
+    AppleAuth.config.apple_client_id = jwt_aud
   end
 
   let(:params) do
