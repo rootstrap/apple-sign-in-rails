@@ -1,6 +1,6 @@
 require 'jwt'
 
-describe 'POST api/v1/users/registrations/apple_sign_up', type: :request do
+describe 'POST api/v1/user/apple_sign_in', type: :request do
   let(:jwt_sub) { user_identity }
   let(:jwt_iss) { 'https://appleid.apple.com' }
   let(:jwt_aud) { 'com.apple_sign_in' }
@@ -32,7 +32,7 @@ describe 'POST api/v1/users/registrations/apple_sign_up', type: :request do
         status: 200,
         headers: { 'Content-Type': 'application/json' }
       )
-    allow_any_instance_of(AppleAuth::Token).to receive(:authenticate)
+    allow_any_instance_of(AppleAuth::Token).to receive(:authenticate!)
     AppleAuth.config.apple_client_id = jwt_aud
   end
 
@@ -59,7 +59,6 @@ describe 'POST api/v1/users/registrations/apple_sign_up', type: :request do
 
       context 'when the user was registered' do
         before { subject }
-        
         it 'creates a new user' do
           expect { subject }.not_to change { User.count }
         end
